@@ -8,6 +8,11 @@ A really rough demo of virtual list, aka virtual scroller.
 
 Demo: [StackBlitz](https://stackblitz.com/edit/vitejs-vite-afjm4m?file=package.json)
 
+## Screenshot
+
+<img src="README.assets/image-20220925165657223.png" alt="image-20220925165657223" style="zoom:67%;" />
+
+
 ## useVirtualList hook
 
 ```tsx
