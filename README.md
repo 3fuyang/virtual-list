@@ -1,5 +1,9 @@
 # Virtual List Demo
 
+> Acknowledgement:
+>
+> + ~~Best Forum~~ - [「前端进阶」高性能渲染十万条数据(虚拟列表) - 掘金 (juejin.cn)](https://juejin.cn/post/6844903982742110216)
+
 A really rough demo of virtual list, aka virtual scroller.
 
 Demo: [StackBlitz](https://stackblitz.com/edit/vitejs-vite-afjm4m?file=package.json)
