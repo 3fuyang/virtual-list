@@ -1,5 +1,7 @@
 # Virtual List Demo
 
+> Deploying demos on StackBlitz is much more reassuring than getting ~~F-word~~ed up by your cheap server.
+>
 > Acknowledgement:
 >
 > + ~~Best Forum~~ - [「前端进阶」高性能渲染十万条数据(虚拟列表) - 掘金 (juejin.cn)](https://juejin.cn/post/6844903982742110216)
@@ -11,7 +13,6 @@ Demo: [StackBlitz](https://stackblitz.com/edit/vitejs-vite-afjm4m?file=package.j
 ## Screenshot
 
 <img src="README.assets/image-20220925165657223.png" alt="image-20220925165657223" style="zoom:67%;" />
-
 
 ## useVirtualList hook
 
