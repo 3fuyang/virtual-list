@@ -22,6 +22,11 @@ function App() {
 
   return (
     <div className="App">
+      <div className="notification">
+        If it's not rendered properly in StackBlitz,
+        <br/>
+        just <strong>REFRESH</strong> !
+      </div>
       <div className="mobile">
         <VirtualList list={list} itemHeight={50} />
       </div>
