@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FC } from 'react';
+import { type FC } from 'react';
 import { useVirtualList } from '../hooks/useVirtualList';
 import './virtual-list.css';
 
