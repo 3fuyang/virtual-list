@@ -1,6 +1,6 @@
 # Virtual List Demo
 
-> Deploying demos on StackBlitz is much more reassuring than getting ~~F-word~~ed up by your cheap server.
+> Deploying demos on StackBlitz is much more reassuring than getting ~~F-word~~ed up by my own cheap server.
 >
 > Acknowledgement:
 >
@@ -15,6 +15,72 @@ Demo: [StackBlitz](https://stackblitz.com/edit/vitejs-vite-afjm4m?file=package.j
 <img src="README.assets/image-20220925165657223.png" alt="image-20220925165657223" style="zoom:67%;" />
 
 ## useVirtualList hook
+
+### with Intersection Observer
+
+```tsx
+// useVirtualList.tsx
+/**
+* itemHeight: the fixed height of every rendered list-item
+* totalNum: the length of the long long list
+*/
+export function useVirtualList(itemHeight: number, totalNum: number) {
+  // container Ref for capturing its clientHeight
+  const containerRef = useRef<HTMLDivElement>(null)
+  // visible list Ref to be observed by Intersection Observer
+  const visionRef = useRef<HTMLDivElement>(null)
+  // the start index of the visible list
+  const [startIndex, setStart] = useState(0),
+  // the volume of the container (how many items it can display)
+  [volume, setVolume] = useState(0),
+  // the ending index of the visible list
+  [endIndex, setEnd] = useState(0),
+  // the offset which the visible list is away from the scrollable container
+  [startOffset, setOffset] = useState(0)
+
+  useEffect(() => {
+    if (containerRef.current && visionRef.current) {
+      setVolume(Math.ceil(containerRef.current.clientHeight / itemHeight) + 1)
+
+      // instantiate and apply the Observer
+      const intersectionObserver = new IntersectionObserver(() => {
+        if (containerRef.current) {
+          const scrollTop = containerRef.current.scrollTop
+          setStart(Math.floor(scrollTop / itemHeight))
+          setOffset(scrollTop - scrollTop % itemHeight)
+        }
+      }, {
+        root: containerRef.current,
+	// thresholds according to your requirements
+	// triggers callback when the vision-list accounts 30%, 50%, 70%, 90% of the viewport of the container
+	// to handle different velocity of user scrolling
+        threshold: [0.3, 0.5, 0.7, 0.9]
+      })
+
+      intersectionObserver.observe(visionRef.current)
+  
+      return () => {
+        visionRef.current && intersectionObserver.unobserve(visionRef.current)
+      }
+    }
+  }, [containerRef, visionRef])
+
+  useEffect(() => {
+    setEnd(Math.min(totalNum, startIndex + volume))
+  }, [startIndex, volume])
+
+  return {
+    containerRef,
+    // export the visionRef 
+    visionRef,
+    startIndex,
+    endIndex,
+    startOffset
+  }
+}
+```
+
+### with Scroll Event Handler (onscroll)
 
 ```tsx
 // useVirtualList.tsx
