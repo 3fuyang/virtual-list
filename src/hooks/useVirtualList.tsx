@@ -13,7 +13,8 @@ import { useEffect, useRef, useState } from "react";
 export function useVirtualList(itemHeight: number, totalNum: number) {
   // 容器元素Ref，用以获取其clientHeight
   const containerRef = useRef<HTMLDivElement>(null)
-
+  // 可视区域Ref
+  const visionRef = useRef<HTMLDivElement>(null)
   // 可视区域起始元素索引
   const [startIndex, setStart] = useState(0),
   // 容器所能容纳item条数
@@ -24,22 +25,27 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
   [startOffset, setOffset] = useState(0)
 
   useEffect(() => {
-    if (containerRef.current) {
+    if (containerRef.current && visionRef.current) {
       setVolume(Math.ceil(containerRef.current.clientHeight / itemHeight) + 1)
 
-      containerRef.current.onscroll = (e: Event) => {
+      const intersectionObserver = new IntersectionObserver(() => {
         if (containerRef.current) {
           const scrollTop = containerRef.current.scrollTop
           setStart(Math.floor(scrollTop / itemHeight))
           setOffset(scrollTop - scrollTop % itemHeight)
         }
+      }, {
+        root: containerRef.current,
+        threshold: [0.3, 0.5, 0.7, 0.9]
+      })
+
+      intersectionObserver.observe(visionRef.current)
+    
+      return () => {
+        visionRef.current && intersectionObserver.unobserve(visionRef.current)
       }
     }
-
-    return () => {
-      containerRef.current && (containerRef.current.onscroll = null)
-    }
-  }, [containerRef])
+  }, [containerRef, visionRef])
 
   useEffect(() => {
     setEnd(Math.min(totalNum, startIndex + volume))
@@ -47,6 +53,7 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
 
   return {
     containerRef,
+    visionRef,
     startIndex,
     endIndex,
     startOffset

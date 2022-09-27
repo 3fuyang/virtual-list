@@ -15,6 +15,7 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
   
   const {
     containerRef,
+    visionRef,
     startIndex,
     endIndex,
     startOffset
@@ -23,7 +24,7 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
   return (
     <div className="list-container" ref={containerRef}>
       <div className="list-scroll-layer" style={{ height: list.length * itemHeight }}></div>
-      <div className="list-vision" style={{ transform: `translate3d(0px, ${startOffset}px, 0px)` }}>
+      <div className="list-vision" ref={visionRef} style={{ transform: `translate3d(0px, ${startOffset}px, 0px)` }}>
         {list.slice(startIndex, endIndex).map(({ content, key }) => (
           <div className="list-item" key={key}>
             {content} {key}
