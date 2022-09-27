@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
   let timer: number
   return (...args: any[]) => {
     clearTimeout(timer)
-    setTimeout(() => {
+    timer = setTimeout(() => {
       callback(...args)
     }, delay)
   }
