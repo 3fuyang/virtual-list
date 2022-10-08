@@ -1,6 +1,6 @@
-import { type FC } from 'react';
-import { useVirtualList } from '../hooks/useVirtualList';
-import './virtual-list.css';
+import { type FC } from 'react'
+import { useVirtualList } from '../hooks/useVirtualList'
+import './virtual-list.css'
 
 export interface ListItem {
   content: string;
@@ -12,7 +12,7 @@ interface ListProps {
 }
 
 const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
-  
+
   const {
     containerRef,
     visionRef,
@@ -20,7 +20,7 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
     endIndex,
     startOffset
   } = useVirtualList(itemHeight, list.length)
-  
+
   return (
     <div className="list-container" ref={containerRef}>
       <div className="list-scroll-layer" style={{ height: list.length * itemHeight }}></div>
@@ -32,7 +32,7 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VirtualList;
+export default VirtualList
