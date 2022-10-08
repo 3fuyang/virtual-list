@@ -59,11 +59,11 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
         visionRef.current && intersectionObserver.unobserve(visionRef.current)
       }
     }
-  }, [containerRef, visionRef])
+  }, [])
 
   useEffect(() => {
     setEnd(Math.min(totalNum, startIndex + volume.current))
-  }, [startIndex, volume.current])
+  }, [startIndex])
 
   return {
     containerRef,
