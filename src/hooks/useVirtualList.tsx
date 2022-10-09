@@ -32,15 +32,15 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
     volume = useRef(0)
 
   // 可视区域起始元素索引
-  const [startIndex, setStart] = useState(0),
-    // 可视区域结束元素索引
-    [endIndex, setEnd] = useState(0),
+  const [startIndex, setStart] = useState(+0),
     // 可视区域相对顶部滑动距离
     [startOffset, setOffset] = useState(0)
 
   useEffect(() => {
     if (containerRef.current && visionRef.current) {
       volume.current = Math.ceil(containerRef.current.clientHeight / itemHeight) + 1
+      // before the intersection observer triggers, re-render and set the endIndex
+      setStart(-0)
 
       const intersectionObserver = new IntersectionObserver(() => {
         if (containerRef.current) {
@@ -55,21 +55,19 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
 
       intersectionObserver.observe(visionRef.current)
 
+      import.meta.env.DEV && console.log('IntersectionObserver observed.')
+
       return () => {
         visionRef.current && intersectionObserver.unobserve(visionRef.current)
+        import.meta.env.DEV && console.log('IntersectionObserver unobserved')
       }
     }
   }, [])
-
-  useEffect(() => {
-    setEnd(Math.min(totalNum, startIndex + volume.current))
-  }, [startIndex])
 
   return {
     containerRef,
     visionRef,
     startIndex,
-    endIndex,
     startOffset,
     volume
   }

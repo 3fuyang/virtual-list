@@ -17,9 +17,11 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
     containerRef,
     visionRef,
     startIndex,
-    endIndex,
-    startOffset
+    startOffset,
+    volume
   } = useVirtualList(itemHeight, list.length)
+
+  const endIndex = Math.min(startIndex + volume.current, list.length)
 
   return (
     <div className="list-container" ref={containerRef}>
