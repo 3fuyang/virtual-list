@@ -50,7 +50,7 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
         }
       }, {
         root: containerRef.current,
-        threshold: [0, 1, 0.3, 0.5, 0.7, 0.8, 0.9]
+        threshold: [0, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1]
       })
 
       intersectionObserver.observe(visionRef.current)
@@ -70,6 +70,7 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
     visionRef,
     startIndex,
     endIndex,
-    startOffset
+    startOffset,
+    volume
   }
 }
