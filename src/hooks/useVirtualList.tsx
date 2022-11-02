@@ -43,11 +43,9 @@ export function useVirtualList(itemHeight: number, totalNum: number) {
       setStart(-0)
 
       const intersectionObserver = new IntersectionObserver(() => {
-        if (containerRef.current) {
-          const scrollTop = containerRef.current.scrollTop
+          const scrollTop = containerRef.current!.scrollTop
           setStart(Math.floor(scrollTop / itemHeight))
           setOffset(scrollTop - scrollTop % itemHeight)
-        }
       }, {
         root: containerRef.current,
         threshold: [0, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1]
