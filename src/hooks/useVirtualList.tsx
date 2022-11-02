@@ -23,7 +23,7 @@ const throttle = <T extends any[]>(cb: (...args: T) => void, interval: number = 
   }
 } */
 
-export function useVirtualList(itemHeight: number, totalNum: number) {
+export function useVirtualList(itemHeight: number) {
   // 容器元素Ref，用以获取其clientHeight
   const containerRef = useRef<HTMLDivElement>(null),
     // 可视区域Ref
