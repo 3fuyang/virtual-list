@@ -1,0 +1,1 @@
+.list-container{height:500px;width:300px;overflow:auto;position:relative}.list-scroll-layer{position:absolute;top:0;right:0;left:0;z-index:0}.list-vision{position:absolute;top:0;left:0;right:0}.list-item{height:45px;box-sizing:border-box;background-color:#eee;margin:0 0 5px;border-radius:.4em;display:flex;align-items:center;justify-content:center}
