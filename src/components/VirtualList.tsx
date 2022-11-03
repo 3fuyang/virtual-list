@@ -3,11 +3,11 @@ import { useVirtualList } from '../hooks/useVirtualList'
 import './virtual-list.css'
 
 export interface ListItem {
-  content: string;
-  key: number;
+  content: string
+  key: number
 }
 interface ListProps {
-  list: ListItem[];
+  list: ListItem[]
   itemHeight: number
 }
 
