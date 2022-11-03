@@ -8,7 +8,7 @@ const VirtualList = lazy(() => import('./components/VirtualList'));
 const createList = (): ListItem[] => {
   const result: ListItem[] = []
   let count = 0
-  Array.from({ length: 1000 }).forEach(() => {
+  Array.from({ length: 1000 }, () => {
     result.push({
       content: faker.name.fullName(),
       key: count++
@@ -18,7 +18,9 @@ const createList = (): ListItem[] => {
 };
 
 function App() {
-  const [list] = useState(createList());
+  // use an initializer function instead of a computed value `createList()`
+  // to avoid computation overhead during re-rendering
+  const [list] = useState(createList)
 
   return (
     <div className="App">
