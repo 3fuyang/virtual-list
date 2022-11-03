@@ -12,7 +12,7 @@ Demo: [StackBlitz](https://stackblitz.com/edit/vitejs-vite-afjm4m?file=package.j
 
 ## Screenshot
 
-<img src="README.assets/image-20220925165657223.png" alt="image-20220925165657223" style="zoom:67%;" />
+<img src="README.assets/image-20220925165657223.png" alt="image-20220925165657223" style="zoom:50%;" />
 
 ## useVirtualList hook
 
@@ -158,3 +158,32 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
   );
 };
 ```
+
+## Notes
+
+### When React runs Effects
+
+>  Reference:
+>
+> + [Hooks API Reference – React (reactjs.org)](https://reactjs.org/docs/hooks-reference.html#useeffect)
+
+The function passed to `useEffect` will run after the render is **committed to the screen**.
+
+It is quite confusing that the beta React Docs keeps mentioning Effects are executed **after rendering**, since they [split](https://beta.reactjs.org/learn/render-and-commit) an update(or mount) to "render" and "commit".
+
+### When React attaches the refs to DOM
+
+>  Reference:
+>
+> + [Manipulating the DOM with Refs (reactjs.org)](https://beta.reactjs.org/learn/manipulating-the-dom-with-refs#when-react-attaches-the-refs)
+
+In React, every update is split in [two phases](https://beta.reactjs.org/learn/render-and-commit#step-3-react-commits-changes-to-the-dom):
+
+* During **render,** React calls your components to figure out what should be on the screen.
+* During **commit,** React applies changes to the DOM.
+
+React sets `ref.current` during the **commit**. 
+
++ Before updating the DOM, React sets the affected `ref.current` values to `null`.
+
++ After updating the DOM, React immediately sets them to the corresponding DOM nodes.
