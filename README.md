@@ -8,7 +8,10 @@
 
 A really rough demo of virtual list, aka virtual scroller.
 
-Demo: [StackBlitz](https://stackblitz.com/edit/vitejs-vite-afjm4m?file=package.json)
+Demo:
+
++ [StackBlitz](https://stackblitz.com/edit/vitejs-vite-afjm4m?file=package.json) (Veryyyy slow!!)
++ [GitHub Pages](https://3fuyang.github.io/virtual-list/) (If you've visited my blog before, press `ctrl + shift + f` to clear the Service Worker.)
 
 ## Screenshot
 
@@ -163,7 +166,7 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
 
 ### When React runs Effects
 
->  Reference:
+> Reference:
 >
 > + [Hooks API Reference – React (reactjs.org)](https://reactjs.org/docs/hooks-reference.html#useeffect)
 
@@ -173,7 +176,7 @@ It is quite confusing that the beta React Docs keeps mentioning Effects are exec
 
 ### When React attaches the refs to DOM
 
->  Reference:
+> Reference:
 >
 > + [Manipulating the DOM with Refs (reactjs.org)](https://beta.reactjs.org/learn/manipulating-the-dom-with-refs#when-react-attaches-the-refs)
 
@@ -182,8 +185,7 @@ In React, every update is split in [two phases](https://beta.reactjs.org/learn/r
 * During **render,** React calls your components to figure out what should be on the screen.
 * During **commit,** React applies changes to the DOM.
 
-React sets `ref.current` during the **commit**. 
+React sets `ref.current` during the **commit**.
 
 + Before updating the DOM, React sets the affected `ref.current` values to `null`.
-
 + After updating the DOM, React immediately sets them to the corresponding DOM nodes.
