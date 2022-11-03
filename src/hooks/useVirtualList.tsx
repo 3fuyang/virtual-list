@@ -23,11 +23,11 @@ const throttle = <T extends any[]>(cb: (...args: T) => void, interval: number = 
   }
 } */
 
-export function useVirtualList(itemHeight: number) {
+export function useVirtualList<C extends HTMLElement, V extends HTMLElement>(itemHeight: number) {
   // 容器元素Ref，用以获取其clientHeight
-  const containerRef = useRef<HTMLDivElement>(null),
+  const containerRef = useRef<C>(null),
     // 可视区域Ref
-    visionRef = useRef<HTMLDivElement>(null),
+    visionRef = useRef<V>(null),
     // 容器所能容纳item条数
     volume = useRef(0)
 
@@ -43,9 +43,10 @@ export function useVirtualList(itemHeight: number) {
       setStart(-0)
 
       const intersectionObserver = new IntersectionObserver(() => {
-          const scrollTop = containerRef.current!.scrollTop
-          setStart(Math.floor(scrollTop / itemHeight))
-          setOffset(scrollTop - scrollTop % itemHeight)
+        // access scrollTop triggers reflow
+        const scrollTop = containerRef.current!.scrollTop
+        setStart(Math.floor(scrollTop / itemHeight))
+        setOffset(scrollTop - scrollTop % itemHeight)
       }, {
         root: containerRef.current,
         threshold: [0, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1]

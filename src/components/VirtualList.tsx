@@ -19,7 +19,7 @@ const VirtualList: FC<ListProps> = ({ list, itemHeight = 50 }) => {
     startIndex,
     startOffset,
     volume
-  } = useVirtualList(itemHeight)
+  } = useVirtualList<HTMLDivElement, HTMLDivElement>(itemHeight)
 
   const endIndex = Math.min(startIndex + volume.current, list.length)
 
