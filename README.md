@@ -15,7 +15,7 @@ Demo:
 
 ## Screenshot
 
-<img src="README.assets/image-20220925165657223.png" alt="image-20220925165657223" style="zoom:50%;" />
+<img src="README.assets/image-20220925165657223.jpg" alt="image-20220925165657223" />
 
 ## useVirtualList hook
 
